@@ -10,20 +10,20 @@ export default class JupiterPositionCalculator extends PlanetPositionCalculator 
     }
 
     protected calculateHeliocentricCoordinates(date: Date): RectangularCoordinates {
-        let coords = super.calculateHeliocentricCoordinates(date).toSphericalCoordinates();
+        const coords = super.calculateHeliocentricCoordinates(date).toSphericalCoordinates();
 
-        let jupierMeanAnomaly = OrbitFactories.jupiter.build(date).meanAnomaly();
-        let saturnMeanAnomaly = OrbitFactories.saturn.build(date).meanAnomaly();
+        const jupierMeanAnomaly = OrbitFactories.jupiter.build(date).meanAnomaly();
+        const saturnMeanAnomaly = OrbitFactories.saturn.build(date).meanAnomaly();
 
-        let longitudePerturbation = this.computeLongitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
+        const longitudePerturbation = this.computeLongitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
         coords.longitude = coords.longitude.add(longitudePerturbation);
 
         return coords.toRectangularCoordinates();
     }
 
     private computeLongitudePerturbations(jupierMeanAnomaly: Angle, saturnMeanAnomaly: Angle): Angle {
-        var mj = jupierMeanAnomaly.rad();
-        var ms = saturnMeanAnomaly.rad();
+        const mj = jupierMeanAnomaly.rad();
+        const ms = saturnMeanAnomaly.rad();
 
         return Angle.ofDeg(
             -0.332 * Math.sin(2 * mj - 5 * ms - Angle.ofDeg(67.6).rad())

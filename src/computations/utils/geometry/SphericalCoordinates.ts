@@ -13,9 +13,9 @@ export default class SphericalCoordinates {
     }
 
     public toRectangularCoordinates(): RectangularCoordinates {
-        let x = this.radius * Math.cos(this.longitude.rad()) * Math.cos(this.latitude.rad());
-        let y = this.radius * Math.sin(this.longitude.rad()) * Math.cos(this.latitude.rad());
-        let z = this.radius * Math.sin(this.latitude.rad());
+        const x = this.radius * Math.cos(this.longitude.rad()) * Math.cos(this.latitude.rad());
+        const y = this.radius * Math.sin(this.longitude.rad()) * Math.cos(this.latitude.rad());
+        const z = this.radius * Math.sin(this.latitude.rad());
 
         return new RectangularCoordinates(x, y, z);
     }

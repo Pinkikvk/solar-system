@@ -16,30 +16,30 @@ export default class PlanetPositionCalculator {
     }
 
     public calculate(date: Date): ObjectCoordinates {
-        var helio = this.calculateHeliocentricCoordinates(date);
-        var sunPos = this.calculateSunPosition(date);
-        var geoEclip = helio.add(sunPos);
-        var geoEquat = this.eclipticToEquatorial(geoEclip, date);
+        const helio = this.calculateHeliocentricCoordinates(date);
+        const sunPos = this.calculateSunPosition(date);
+        const geoEclip = helio.add(sunPos);
+        const geoEquat = this.eclipticToEquatorial(geoEclip, date);
 
         return new ObjectCoordinates(helio, helio.toSphericalCoordinates(), geoEclip, geoEclip.toSphericalCoordinates(), geoEquat, geoEquat.toSphericalCoordinates());
     }
 
     private eclipticToEquatorial(eclip: RectangularCoordinates, date: Date): RectangularCoordinates {
-        var oblecl = Angle.ofDeg(23.4393 - 3.563E-7 * toDaysSinceMilenium(date)).rad();
-        var xequat = eclip.x;
-        var yequat = eclip.y * Math.cos(oblecl) - eclip.z * Math.sin(oblecl);
-        var zequat = eclip.y * Math.sin(oblecl) + eclip.z * Math.cos(oblecl);
+        const oblecl = Angle.ofDeg(23.4393 - 3.563E-7 * toDaysSinceMilenium(date)).rad();
+        const xequat = eclip.x;
+        const yequat = eclip.y * Math.cos(oblecl) - eclip.z * Math.sin(oblecl);
+        const zequat = eclip.y * Math.sin(oblecl) + eclip.z * Math.cos(oblecl);
 
         return new RectangularCoordinates(xequat, yequat, zequat);
     }
 
     private calculateSunPosition(date: Date): RectangularCoordinates {
-        var sunOrbit = OrbitFactories.sun.build(date);
+        const sunOrbit = OrbitFactories.sun.build(date);
         return KeplerEquation.calculate(sunOrbit);
     }
 
     protected calculateHeliocentricCoordinates(date: Date): RectangularCoordinates {
-        var orbit = this.orbitFactory.build(date);
+        const orbit = this.orbitFactory.build(date);
         return KeplerEquation.calculate(orbit);
     }
 }

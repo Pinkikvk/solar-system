@@ -21,9 +21,9 @@ export default class RectangularCoordinates {
     }
 
     public toSphericalCoordinates(): SphericalCoordinates {
-        let radius = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
-        let longitude = Angle.ofRad(Math.atan2(this.y, this.x)).normalize();
-        let latitude = Angle.ofRad(Math.atan2(this.z, Math.sqrt(this.x * this.x + this.y * this.y)));
+        const radius = Math.sqrt(this.x * this.x + this.y * this.y + this.z * this.z);
+        const longitude = Angle.ofRad(Math.atan2(this.y, this.x)).normalize();
+        const latitude = Angle.ofRad(Math.atan2(this.z, Math.sqrt(this.x * this.x + this.y * this.y)));
 
         return new SphericalCoordinates(longitude, latitude, radius);
     }

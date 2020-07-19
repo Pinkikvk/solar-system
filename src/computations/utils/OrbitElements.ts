@@ -13,10 +13,10 @@ export default class OrbitElements {
 
         this.a = semiMajorAxis;
         this.e = eccentricity;
-        this.i = inclination;
-        this.N = longitudeOfAscendingNode;
-        this.w = argumentOfPeriapsis;
-        this.M = meanAnomaly;
+        this.i = inclination.normalize();
+        this.N = longitudeOfAscendingNode.normalize();
+        this.w = argumentOfPeriapsis.normalize();
+        this.M = meanAnomaly.normalize();
     }
 
     public semiMajorAxis(): number {
@@ -44,10 +44,10 @@ export default class OrbitElements {
     }
 
     public longitudeOfPeriapsis(): Angle {
-        return this.longitudeOfAscendingNode().add(this.argumentOfPeriapsis());
+        return this.longitudeOfAscendingNode().add(this.argumentOfPeriapsis()).normalize();
     }
 
     public meanLongitude(): Angle {
-        return this.meanAnomaly().add(this.longitudeOfPeriapsis());
+        return this.meanAnomaly().add(this.longitudeOfPeriapsis()).normalize();
     }
 }

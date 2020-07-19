@@ -14,7 +14,7 @@ export default class Angle {
     }
 
     public normalize(): Angle {
-        var value = this.valueInRad % (2 * Math.PI);
+        let value = this.valueInRad % (2 * Math.PI);
         value = value < 0 ? value + (2 * Math.PI) : value;
         return Angle.ofRad(value);
     }

@@ -10,22 +10,22 @@ export default class SaturnPositionCalculator extends PlanetPositionCalculator {
     }
 
     protected calculateHeliocentricCoordinates(date: Date): RectangularCoordinates {
-        var coords = super.calculateHeliocentricCoordinates(date).toSphericalCoordinates();
+        const coords = super.calculateHeliocentricCoordinates(date).toSphericalCoordinates();
 
-        var jupierMeanAnomaly = OrbitFactories.jupiter.build(date).meanAnomaly();
-        var saturnMeanAnomaly = OrbitFactories.saturn.build(date).meanAnomaly();
+        const jupierMeanAnomaly = OrbitFactories.jupiter.build(date).meanAnomaly();
+        const saturnMeanAnomaly = OrbitFactories.saturn.build(date).meanAnomaly();
 
-        var longitudePerturbation = this.computeLongitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
+        const longitudePerturbation = this.computeLongitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
         coords.longitude = coords.longitude.add(longitudePerturbation);
-        var latitudePerturbations = this.computeLatitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
+        const latitudePerturbations = this.computeLatitudePerturbations(jupierMeanAnomaly, saturnMeanAnomaly);
         coords.latitude = coords.latitude.add(latitudePerturbations);
 
         return coords.toRectangularCoordinates();
     }
 
     private computeLongitudePerturbations(jupierMeanAnomaly: Angle, saturnMeanAnomaly: Angle): Angle {
-        var mj = jupierMeanAnomaly.rad();
-        var ms = saturnMeanAnomaly.rad();
+        const mj = jupierMeanAnomaly.rad();
+        const ms = saturnMeanAnomaly.rad();
 
         return Angle.ofDeg(
             0.812 * Math.sin(2 * mj - 5 * ms - Angle.ofDeg(67.6).rad())
@@ -37,8 +37,8 @@ export default class SaturnPositionCalculator extends PlanetPositionCalculator {
     }
 
     private computeLatitudePerturbations(jupierMeanAnomaly: Angle, saturnMeanAnomaly: Angle): Angle {
-        var mj = jupierMeanAnomaly.rad();
-        var ms = saturnMeanAnomaly.rad();
+        const mj = jupierMeanAnomaly.rad();
+        const ms = saturnMeanAnomaly.rad();
 
         return Angle.ofDeg(
             -0.020 * Math.cos(2 * mj - 4 * ms - Angle.ofDeg(2).rad())
