@@ -1,24 +1,5 @@
-# solar-system
+# TypeScript + three.js solar system 
 
-## Project setup
-```
-npm install
-```
+All calculations base on http://www.stjarnhimlen.se/comp/tutorial.html
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+![Printscreen](https://github.com/Pinkikvk/solar-system/raw/master/printscreen.png)
