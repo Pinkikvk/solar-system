@@ -2,7 +2,11 @@
   <div id="app">
     <SolarSystemViewer v-bind:planets="planets" />
     <div class="app-stats">
-      <PositionsTable v-bind:planets="planets" v-bind:date="date" :key="updateKey" />
+      <PositionsTable
+        v-bind:planets="planets"
+        v-bind:date="date"
+        :key="updateKey"
+      />
     </div>
   </div>
 </template>
